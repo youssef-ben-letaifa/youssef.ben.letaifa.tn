@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Certifications & Projects - Youssef BEN LETAIFA</title>
+    <meta name="description" content="Professional Certifications and Projects of Youssef BEN LETAIFA" />
+    <link rel="icon" href="my.png" />
+    <!-- React 18 & Babel CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      :root {
+        --primary: #1e90ff;
+        --primary-dark: #0077cc;
+        --bg: #0d1117;
+        --box-bg: #161b22;
+        --card-bg: #232b36;
+        --text: #f5f5f5;
+        --muted: #8d96a7;
+        --accent: #1e90ff;
+        --shadow: 0 4px 32px 0 rgba(30,144,255,0.10);
+        --radius: 18px;
+        --skill-radius: 32px;
+        --nav-height: 70px;
+      }
+      html, body {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: system-ui, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+      }
+      *, *:before, *:after {
+        box-sizing: inherit;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+        outline: none;
+      }
+      a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 40px;
+        height: var(--nav-height);
+        background: rgba(13, 17, 23, 0.8);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        backdrop-filter: blur(12px);
+        box-shadow: var(--shadow);
+      }
+      .logo {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--primary);
+        letter-spacing: 1.8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .logo-img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 2px solid var(--primary);
+        object-fit: cover;
+      }
+      nav {
+        display: flex;
+        gap: 18px;
+      }
+      nav a {
+        color: #bbb;
+        font-weight: 500;
+        padding: 6px 10px;
+        border-radius: 5px;
+        transition: background 0.2s, color 0.2s;
+        position: relative;
+      }
+      nav a.active,
+      nav a:hover {
+        color: var(--primary);
+        background: rgba(30,144,255,0.05);
+      }
+      nav a::after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        border-radius: 2px;
+        transition: width .3s;
+        margin-top: 3px;
+      }
+      nav a:hover::after, nav a.active::after {
+        width: 100%;
+      }
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: #fff;
+        padding: 11px 26px;
+        border-radius: var(--radius);
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 2px 8px #1e90ff77;
+        transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+        font-size: 1rem;
+      }
+      .btn-primary:focus-visible {
+        outline: 2px solid #fff;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px) scale(1.04);
+        background: linear-gradient(120deg, #2f9bff, #005fa3);
+        box-shadow: 0 4px 24px #1e90ffaa;
+      }
+      /* MAIN PAGE */
+      .cp-main {
+        max-width: 1200px;
+        margin: 56px auto 0 auto;
+        padding: 0 24px 64px 24px;
+      }
+      .cp-section-title {
+        font-size: 2.4rem;
+        font-weight: 900;
+        color: var(--primary);
+        margin-bottom: 8px;
+        letter-spacing: 1px;
+      }
+      .cp-section-subtitle {
+        font-size: 1.18rem;
+        color: var(--muted);
+        margin-bottom: 28px;
+        font-weight: 400;
+      }
+      .cp-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 36px;
+        margin-bottom: 56px;
+      }
+      .cp-card {
+        background: var(--box-bg);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 32px 28px 22px 28px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+        transition: box-shadow 0.22s, transform 0.18s, background 0.18s;
+        min-height: 220px;
+        overflow: visible;
+      }
+      .cp-card:hover {
+        box-shadow: 0 10px 36px 0 #1e90ff23;
+        transform: translateY(-6px) scale(1.025);
+        background: #202736;
+      }
+      .cp-card-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 14px;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-shadow: 0 2px 16px #1e90ff18;
+      }
+      .cp-cert-list, .cp-project-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        width: 100%;
+      }
+      .cert-item, .project-item {
+        background: var(--card-bg);
+        color: var(--text);
+        border-radius: var(--skill-radius);
+        box-shadow: 0 1.5px 8px 0 #0077cc19;
+        border: 1.5px solid #25324b;
+        padding: 15px 23px;
+        margin: 0;
+        transition: background 0.18s, color 0.18s, box-shadow 0.18s, border 0.18s;
+        position: relative;
+        cursor: default;
+        user-select: none;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5px;
+        font-size: 1.08rem;
+        font-weight: 500;
+        animation: fadeIn 0.7s both;
+      }
+      .cert-item-title, .project-title {
+        color: var(--primary);
+        font-weight: 600;
+        letter-spacing: 0.1px;
+        font-size: 1.08rem;
+      }
+      .cert-item-org, .project-org {
+        color: var(--muted);
+        font-size: 0.98rem;
+        margin-left: 8px;
+        font-weight: 400;
+      }
+      .cert-item-date, .project-date {
+        font-size: 0.92rem;
+        color: #6d8099;
+        margin-left: 6px;
+      }
+      .project-desc {
+        color: #e2eaf8;
+        font-size: 1.01rem;
+        margin: 6px 0 7px 0;
+      }
+      .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 3px 0 0 0;
+      }
+      .project-tag {
+        display: inline-block;
+        background: linear-gradient(120deg, #232b36 60%, #202736 100%);
+        color: var(--primary);
+        font-size: 0.98rem;
+        font-weight: 500;
+        padding: 6px 16px;
+        border-radius: var(--skill-radius);
+        border: 1.2px solid #25324b;
+        transition: background 0.18s, color 0.18s, box-shadow 0.18s, border 0.18s;
+        user-select: none;
+      }
+      .project-tag:hover {
+        background: linear-gradient(120deg, #1e293b 70%, #1e2537 100%);
+        color: #fff;
+        border: 1.2px solid var(--primary);
+        box-shadow: 0 3px 16px 0 #1e90ff4a;
+      }
+      .project-links {
+        margin-top: 7px;
+        display: flex;
+        gap: 18px;
+      }
+      .project-link {
+        color: var(--primary);
+        font-size: 1.05rem;
+        font-weight: 600;
+        transition: color 0.16s;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .project-link:hover {
+        color: #fff;
+        text-decoration: underline;
+      }
+      @keyframes fadeIn {
+        0% { opacity: 0; transform: translateY(20px);}
+        100% { opacity: 1; transform: translateY(0);}
+      }
+      /* Responsive design */
+      @media (max-width: 800px) {
+        .cp-section-title {
+          font-size: 2rem;
+        }
+        .cp-card {
+          padding: 22px 15px 12px 15px;
+        }
+        .cp-main {
+          padding: 0 7vw 64px 7vw;
+        }
+      }
+      @media (max-width: 480px) {
+        .cp-section-title {
+          font-size: 1.5rem;
+        }
+        .cp-grid {
+          gap: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // --- HEADER ---
+      const NAV_LINKS = [
+        { label: "Home", href: "home.html", id: "home" },
+        { label: "Skills", href: "skills.html", id: "skills" },
+        { label: "Projects and certification", href: "project_and_certification.html", id: "pc" },
+        { label: "Contact", href: "contact.html", id: "contact" }
+      ];
+      function Header() {
+        return (
+          <header>
+            <div className="logo">
+              <img src="my.png" alt="Youssef BEN LETAIFA" className="logo-img" loading="lazy" />
+              Youssef
+            </div>
+            <nav aria-label="Main navigation">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.id}
+                  href={link.href}
+                  className={link.id === "cp" ? "active" : ""}
+                  tabIndex={0}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+            <a href="https://www.linkedin.com/in/youssefbenletaifa/" className="btn-primary">Get In Touch</a>
+          </header>
+        );
+      }
+
+      // ---- CERTIFICATIONS DATA ----
+      const CERTIFICATIONS = [
+        {
+          group: "AI & Deep Learning",
+          items: [
+            { title: "ACP: Agent Communication Protocol", org: "DeepLearning.AI", date: "2025" },
+            { title: "Attention in Transformers: PyTorch", org: "DeepLearning.AI", date: "2025" },
+            { title: "Deep Learning & Neural Networks with Keras", org: "IBM", date: "2024" },
+            { title: "Deep Learning with PyTorch: GAN", org: "Coursera", date: "2024" },
+            { title: "LangChain for LLM Application Development", org: "DeepLearning.AI", date: "2024" },
+            { title: "Introduction to Generative AI", org: "Google", date: "2024" },
+            { title: "LLMs as Operating Systems: Agent Memory", org: "DeepLearning.AI", date: "2024" },
+          ]
+        },
+        {
+          group: "NVIDIA & Other Technologies",
+          items: [
+            { title: "Develop in Omniverse With Extensions", org: "NVIDIA", date: "2025" },
+            { title: "Disaster Risk Monitoring Using Satellite Imagery", org: "NVIDIA", date: "2025" },
+            { title: "Getting Started with AI on Jetson Nano", org: "NVIDIA", date: "2025" },
+            { title: "Learn OpenUSD: Data Exchange Pipelines", org: "NVIDIA", date: "2025" },
+            { title: "Learn OpenUSD: Using Attributes", org: "NVIDIA", date: "2025" },
+          ]
+        },
+        {
+          group: "Cybersecurity & Data",
+          items: [
+            { title: "Computer Security", org: "University of London", date: "2024" },
+            { title: "Cybersecurity Professional", org: "Google", date: "2024" },
+            { title: "Google Analytics Certification", org: "Google", date: "2025" },
+            { title: "Data Analytics", org: "IBM", date: "2024" },
+            { title: "AWS Multi-Tier VPC Architecture", org: "Coursera", date: "2024" },
+          ]
+        },
+        {
+          group: "Healthcare & Design",
+          items: [
+            { title: "Medical Software", org: "Yale University", date: "2024" },
+            { title: "Foundations of Healthcare Systems Engineering", org: "Johns Hopkins University", date: "2024" },
+            { title: "Biomedical Visualisation", org: "University of Glasgow", date: "2024" },
+            { title: "Implant Dentistry", org: "University of Hong Kong", date: "2024" },
+          ]
+        },
+        {
+          group: "CAD & Embedded Systems",
+          items: [
+            { title: "AutoCAD Professional: Design and Drafting", org: "Autodesk", date: "2024" },
+            { title: "Embedded Software and Hardware Architecture", org: "University of Colorado Boulder" }
+          ]
+        }
+      ];
+
+      // ---- PROJECTS DATA ----
+      const PROJECTS = [
+        {
+          title: "HGR-Based Multimodal Medical Data Integration and Interaction System for the O.R",
+          org: "National Engineering School of Sousse (ENISo)",
+          date: "Jul 2025 - Aug 2025",
+          description: "Gesture-Controlled Operating Room Interface System enabling touchless control of surgical equipment. Built on Raspberry Pi 5 with an RGB camera and Leap Motion to capture depth and skeletal data; uses a pre-trained gesture recognition model (TensorFlow/TFLite) and a Flask web interface with GPIO hardware control. Focus: hygiene, reliability, low-latency controls, and deployment in simulated OR conditions.",
+          tags: ["Raspberry Pi", "Embedded Systems", "Python", "Flask", "TensorFlow Lite", "ENISo"],
+          links: [
+            { url: "#", label: "Read more" }
+          ]
+        },
+        {
+          title: "Olivetti Faces Classification — Face Recognition using Olivetti dataset",
+          org: "Personal/Academic",
+          date: "Jul 2025",
+          description: "Facial recognition pipeline using scikit-learn and PCA (Eigenfaces), comparing classifiers (SVM, Logistic Regression, LDA). Includes cross-validation, hyperparameter tuning, precision-recall analysis and a modular pipeline for reproducible experiments.",
+          tags: ["Python", "AI", "Deep Learning", "scikit-learn", "PCA"],
+          links: [
+            { url: "https://github.com/youssef-ben-letaifa/Face-Recognition-Olivetti", label: "View Repo" },
+            { url: "#", label: "Read more" }
+          ]
+        },
+        {
+          title: "Intelligent platform for Hack4Food V1.0",
+          org: "INTeK - Institut National des Technologies et des sciences du Kef",
+          date: "Apr 2025",
+          description: "Designed and developed an AgriTech platform to support sustainable hackathons: community features, data tools promoting eco-friendly agriculture, and knowledge-sharing modules for farmers and researchers.",
+          tags: ["Front-End Development", "Web", "Community", "INTeK"],
+          links: [
+            { url: "#", label: "Read more" }
+          ]
+        },
+        {
+          title: "Industrial Robot Arm (3D Design & Simulation)",
+          org: "Personal/Academic",
+          date: "Mar 2025",
+          description: "3D design of a simple industrial robot arm in Fusion 360, produced simulations to validate kinematics and structural behavior.",
+          tags: ["Fusion 360", "Autodesk Inventor", "3D Modeling"],
+          links: [
+            { url: "#", label: "Read more" }
+          ]
+        },
+        {
+          title: "Next Word Prediction (n-gram)",
+          org: "Personal/Academic",
+          date: "Mar 2025",
+          description: "Implemented n-gram next-word predictor using a Kaggle dataset; pipeline involves preprocessing, smoothing, and model optimization to achieve high prediction accuracy.",
+          tags: ["Python", "NLP", "Machine Learning"],
+          links: [
+            { url: "#", label: "Read more" }
+          ]
+        },
+        {
+          title: "Mini GPT AI Agent Model",
+          org: "Personal/Academic",
+          date: "Feb 2025",
+          description: "Built a compact GPT-style agent during DeepLearning.AI training: LLM prompt engineering, agent orchestration and tools integration for practical tasks.",
+          tags: ["LLMs", "Deep Learning", "Custom GPTs"],
+          links: [
+            { url: "#", label: "Read more" }
+          ]
+        }
+      ];
+
+      // ---- COMPONENTS ----
+      function CertificationSection() {
+        return (
+          <>
+            <h1 className="cp-section-title">Professional Certifications</h1>
+            <div className="cp-section-subtitle">
+              Extensive certifications from world-renowned institutions and technology leaders
+            </div>
+            <div className="cp-grid">
+              <div className="cp-card">
+                <div className="cp-card-title" style={{fontSize:'1.18rem',marginBottom:'10px'}}>25+ Professional Certifications</div>
+                <ul className="cp-cert-list">
+                  {CERTIFICATIONS.map((group) => (
+                    <li key={group.group} style={{margin:'0',padding:'0',listStyle:'none',width:'100%'}}>
+                      <div className="cp-card-title" style={{fontSize:'1.09rem',margin:'5px 0'}}>{group.group}</div>
+                      <ul className="cp-cert-list">
+                        {group.items.map((item, idx) => (
+                          <li className="cert-item" key={item.title + idx}>
+                            <span className="cert-item-title">{item.title}</span>
+                            {(item.org || item.date) && (
+                              <span>
+                                {item.org && <span className="cert-item-org">{item.org}</span>}
+                                {item.date && <span className="cert-item-date">{item.date}</span>}
+                              </span>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </>
+        );
+      }
+
+      function ProjectsSection() {
+        return (
+          <>
+            <h1 className="cp-section-title">Selected Projects</h1>
+            <div className="cp-section-subtitle">
+              A curated selection of hands-on projects, internships and prototypes
+            </div>
+            <div className="cp-grid">
+              {PROJECTS.map((p, i) => (
+                <div className="cp-card" key={p.title + p.date}>
+                  <div className="project-title">{p.title}</div>
+                  <div>
+                    <span className="project-org">{p.org}</span>
+                    <span className="project-date">{p.date}</span>
+                  </div>
+                  <div className="project-desc">{p.description}</div>
+                  <div className="project-tags">
+                    {p.tags.map((t, j) => (
+                      <span className="project-tag" key={t + j}>{t}</span>
+                    ))}
+                  </div>
+                  <div className="project-links">
+                    {p.links.map((l, k) => (
+                      <a className="project-link" href={l.url} key={l.label + k} target="_blank" rel="noopener noreferrer">{l.label}</a>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        );
+      }
+
+      function App() {
+        return (
+          <>
+            <Header />
+            <main className="cp-main">
+              <CertificationSection />
+              <ProjectsSection />
+            </main>
+          </>
+        );
+      }
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>

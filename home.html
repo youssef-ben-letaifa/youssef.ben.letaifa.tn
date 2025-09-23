@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Youssef BEN LETAIFA - Portfolio</title>
+    <meta name="description" content="Youssef BEN LETAIFA - Software Engineer, AI and Deep Learning Portfolio" />
+    <link rel="icon" href="my.png" />
+    <!-- React 18 & Babel CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      :root {
+        --primary: #1e90ff;
+        --primary-dark: #0077cc;
+        --bg: #0d1117;
+        --bg-light: #161b22;
+        --text: #f5f5f5;
+        --text-light: #bbb;
+        --accent: #1e90ff;
+        --shadow: 0 8px 32px rgba(2,16,30,0.3);
+        --radius: 14px;
+        --nav-height: 70px;
+      }
+      html {
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+      *, *:before, *:after {
+        box-sizing: inherit;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: radial-gradient(ellipse at top left, var(--bg), #000 120%);
+        color: var(--text);
+        min-height: 100vh;
+        line-height: 1.7;
+        font-size: 18px;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+        outline: none;
+      }
+      a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      /* HEADER */
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 40px;
+        height: var(--nav-height);
+        background: rgba(13, 17, 23, 0.8);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        backdrop-filter: blur(12px);
+        box-shadow: var(--shadow);
+      }
+      .logo {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--primary);
+        letter-spacing: 1.8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .logo-img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 2px solid var(--primary);
+        object-fit: cover;
+      }
+      nav {
+        display: flex;
+        gap: 18px;
+      }
+      nav a {
+        color: var(--text-light);
+        font-weight: 500;
+        padding: 6px 10px;
+        border-radius: 5px;
+        transition: background 0.2s, color 0.2s;
+        position: relative;
+      }
+      nav a.active,
+      nav a:hover {
+        color: var(--primary);
+        background: rgba(30,144,255,0.05);
+      }
+      nav a::after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        border-radius: 2px;
+        transition: width .3s;
+        margin-top: 3px;
+      }
+      nav a:hover::after, nav a.active::after {
+        width: 100%;
+      }
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: #fff;
+        padding: 11px 26px;
+        border-radius: var(--radius);
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 2px 8px #1e90ff77;
+        transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+        font-size: 1rem;
+      }
+      .btn-primary:focus-visible {
+        outline: 2px solid #fff;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px) scale(1.04);
+        background: linear-gradient(120deg, #2f9bff, #005fa3);
+        box-shadow: 0 4px 24px #1e90ffaa;
+      }
+      /* HERO SECTION WITH BACKGROUND IMAGE + OVERLAY */
+      .hero {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 70px 9vw 50px;
+        gap: 40px;
+        flex-wrap: wrap;
+        min-height: 520px;
+        overflow: hidden;
+        z-index: 1;
+        background: none;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(120deg, rgba(10,15,30,0.84) 60%, rgba(30,50,80,0.38)),
+          url('homeBG.jpg') center/cover no-repeat;
+        z-index: 0;
+        pointer-events: none;
+        filter: brightness(0.62) blur(1px);
+      }
+      .hero > * {
+        position: relative;
+        z-index: 1;
+      }
+      .hero-text {
+        flex: 2 1 360px;
+        min-width: 320px;
+        max-width: 600px;
+      }
+      .hero-text h2 {
+        font-size: 1.1rem;
+        font-weight: 400;
+        color: #aaa;
+        margin-bottom: 0;
+      }
+      .hero-text h1 {
+        font-size: clamp(2.5rem, 6vw, 3.8rem);
+        margin: 8px 0 12px;
+        color: var(--primary);
+        font-weight: 800;
+        letter-spacing: 1px;
+      }
+      .hero-text p {
+        margin: 13px 0 23px;
+        color: #e1e8ef;
+        font-size: 1.22rem;
+        line-height: 1.7;
+      }
+      .hero-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin: 18px 0 24px;
+      }
+      .btn-secondary {
+        background: transparent;
+        color: var(--primary);
+        padding: 10px 22px;
+        border: 2px solid var(--primary);
+        border-radius: var(--radius);
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.2s, color 0.2s;
+      }
+      .btn-secondary:hover, .btn-secondary:focus-visible {
+        background: var(--primary);
+        color: #fff;
+      }
+      /* STATS FLEX LAYOUT */
+      .stats {
+        display: flex;
+        justify-content: flex-start;
+        align-items: stretch;
+        gap: 22px;
+        margin-top: 36px;
+        flex-wrap: nowrap;
+      }
+      .stat-box {
+        flex: 1;
+        min-width: 120px;
+        background: var(--bg-light);
+        padding: 20px 0;
+        border-radius: 11px;
+        text-align: center;
+        box-shadow: 0 0 10px #0004;
+        transition: transform 0.22s, box-shadow 0.22s;
+        margin: 0;
+      }
+      .stat-box:hover, .stat-box:focus-visible {
+        transform: translateY(-5px) scale(1.03);
+        box-shadow: 0 4px 22px #1e90ff2a;
+      }
+      .stat-box h3 {
+        font-size: 2rem;
+        margin: 0;
+        color: var(--primary);
+        font-weight: 700;
+      }
+      .stat-box p {
+        font-size: 1rem;
+        margin: 6px 0 0;
+        color: #c9d1d9;
+      }
+      /* HERO IMAGE - MODERN DYNAMIC CIRCLE EFFECT */
+      .hero-img {
+        flex: 1 1 310px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 240px;
+        position: relative;
+        z-index: 1;
+      }
+      .dynamic-avatar {
+        position: relative;
+        display: inline-block;
+        width: 320px;
+        height: 320px;
+      }
+      .dynamic-avatar::before {
+        content: '';
+        position: absolute;
+        inset: -14px;
+        border-radius: 50%;
+        z-index: 1;
+        background:
+          conic-gradient(
+            from 0deg,
+            #1e90ff,
+            #00ffe1,
+            #1e90ff,
+            #0077cc,
+            #1e90ff,
+            #00ffe1,
+            #1e90ff
+          );
+        filter: blur(5px) brightness(1.25);
+        opacity: 0.82;
+        animation: rotate-conic 3.8s linear infinite;
+        pointer-events: none;
+        transition: filter 0.4s;
+      }
+      .dynamic-avatar:hover::before {
+        filter: blur(1.5px) brightness(1.16);
+        opacity: 1;
+        animation-duration: 2.3s;
+      }
+      @keyframes rotate-conic {
+        0% { transform: rotate(0deg);}
+        100% { transform: rotate(360deg);}
+      }
+      .dynamic-avatar img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 6px solid rgba(0,0,0,0.12);
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark)) border-box;
+        filter: grayscale(70%);
+        box-shadow: 0 2px 26px #0006;
+        transition: filter 0.4s, box-shadow 0.22s;
+        object-fit: cover;
+        position: relative;
+        z-index: 2;
+      }
+      .dynamic-avatar img:hover, .dynamic-avatar img:focus-visible {
+        filter: grayscale(0%);
+        box-shadow: 0 2px 40px #1e90ff44;
+      }
+      /* Responsive Design */
+      @media (max-width: 1000px) {
+        .hero {
+          flex-direction: column-reverse;
+          align-items: flex-start;
+          padding: 60px 5vw 40px;
+        }
+        .hero-img {
+          margin-bottom: 30px;
+          align-items: flex-start;
+        }
+        .stats {
+          flex-direction: column;
+          gap: 18px;
+        }
+        .stat-box {
+          min-width: 0;
+        }
+        .dynamic-avatar {
+          width: 220px;
+          height: 220px;
+        }
+      }
+      @media (max-width: 620px) {
+        header {
+          padding: 0 14px;
+        }
+        .hero {
+          padding: 30px 5vw 14px;
+          gap: 30px;
+        }
+        .hero-text {
+          max-width: 100vw;
+        }
+        .dynamic-avatar {
+          width: 150px;
+          height: 150px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // --- DATA ---
+      const NAV_LINKS = [
+       { label: "Home", href: "home.html", id: "home" },
+        { label: "Skills", href: "skills.html", id: "skills" },
+        { label: "Projects and certification", href: "project_and_certification.html", id: "pc" },
+        { label: "Contact", href: "contact.html", id: "contact" }
+      ];
+      const STATS = [
+        { value: "+24", label: "International Certifications" },
+        { value: "+5", label: "Projects Done" },
+        { value: "+4K", label: "LinkedIn Connections" }
+      ];
+      // --- COMPONENTS ---
+      function Header() {
+        // For basic highlighting (single page), Home is active
+        return (
+          <header>
+            <div className="logo">
+              <img
+                src="my.png"
+                alt="Youssef BEN LETAIFA"
+                className="logo-img"
+                loading="lazy"
+              />
+              Youssef Ben Letaifa
+            </div>
+            <nav aria-label="Main navigation">
+              {NAV_LINKS.map((link, i) => (
+                <a
+                  key={link.id}
+                  href={link.href}
+                  className={i === 0 ? "active" : ""}
+                  tabIndex={0}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+            <a href="https://www.linkedin.com/in/youssefbenletaifa/" className="btn-primary">Get In Touch</a>
+          </header>
+        );
+      }
+      function Hero() {
+        return (
+          <section className="hero" id="home">
+            <div className="hero-text">
+              <h2>Hi, I am</h2>
+              <h1>Youssef BEN LETAIFA</h1>
+              <p>
+                Software Engineer &mdash; Artificial Intelligence, Deep Learning &amp; Computer Vision specialist. Passionate about building high-impact, scalable solutions.
+              </p>
+              <div className="hero-buttons">
+                <a href="contact.html" className="btn-primary">Get In Touch</a>
+                <a
+                  href="https://drive.google.com/file/d/11ctUF23IinXjhOEC0LoyZCbWIh1QRXpM/view?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary"
+                  download
+                >
+                  Download CV
+                </a>
+              </div>
+              <div className="stats" aria-label="Professional statistics">
+                {STATS.map((s) => (
+                  <div className="stat-box" tabIndex={0} key={s.label}>
+                    <h3>{s.value}</h3>
+                    <p>{s.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="hero-img">
+              <span className="dynamic-avatar">
+                <img
+                  src="my.png"
+                  alt="Youssef BEN LETAIFA Portrait"
+                  loading="lazy"
+                />
+              </span>
+            </div>
+          </section>
+        );
+      }
+      function App() {
+        return (
+          <>
+            <Header />
+            <Hero />
+          </>
+        );
+      }
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>

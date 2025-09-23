@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Skills & Expertise - Youssef BEN LETAIFA</title>
+    <meta name="description" content="Skills & Expertise of Youssef BEN LETAIFA" />
+    <link rel="icon" href="my.png" />
+    <!-- React 18 & Babel CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      :root {
+        --primary: #1e90ff;
+        --primary-dark: #0077cc;
+        --bg: #0d1117;
+        --box-bg: #161b22;
+        --card-bg: #232b36;
+        --text: #f5f5f5;
+        --muted: #8d96a7;
+        --accent: #1e90ff;
+        --shadow: 0 4px 32px 0 rgba(30,144,255,0.10);
+        --radius: 18px;
+        --skill-radius: 32px;
+        --nav-height: 70px;
+      }
+      html, body {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: system-ui, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+      }
+      *, *:before, *:after {
+        box-sizing: inherit;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+        outline: none;
+      }
+      a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      /* HEADER (copied from previous design) */
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 40px;
+        height: var(--nav-height);
+        background: rgba(13, 17, 23, 0.8);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        backdrop-filter: blur(12px);
+        box-shadow: var(--shadow);
+      }
+      .logo {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--primary);
+        letter-spacing: 1.8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .logo-img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 2px solid var(--primary);
+        object-fit: cover;
+      }
+      nav {
+        display: flex;
+        gap: 18px;
+      }
+      nav a {
+        color: #bbb;
+        font-weight: 500;
+        padding: 6px 10px;
+        border-radius: 5px;
+        transition: background 0.2s, color 0.2s;
+        position: relative;
+      }
+      nav a.active,
+      nav a:hover {
+        color: var(--primary);
+        background: rgba(30,144,255,0.05);
+      }
+      nav a::after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        border-radius: 2px;
+        transition: width .3s;
+        margin-top: 3px;
+      }
+      nav a:hover::after, nav a.active::after {
+        width: 100%;
+      }
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: #fff;
+        padding: 11px 26px;
+        border-radius: var(--radius);
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 2px 8px #1e90ff77;
+        transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+        font-size: 1rem;
+      }
+      .btn-primary:focus-visible {
+        outline: 2px solid #fff;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px) scale(1.04);
+        background: linear-gradient(120deg, #2f9bff, #005fa3);
+        box-shadow: 0 4px 24px #1e90ffaa;
+      }
+      /* SKILLS PAGE */
+      .skills-main {
+        max-width: 1200px;
+        margin: 56px auto 0 auto;
+        padding: 0 24px 64px 24px;
+      }
+      .skills-title {
+        font-size: 2.8rem;
+        font-weight: 900;
+        color: var(--primary);
+        margin-bottom: 8px;
+        letter-spacing: 1px;
+      }
+      .skills-subtitle {
+        font-size: 1.25rem;
+        color: var(--muted);
+        margin-bottom: 28px;
+        font-weight: 400;
+      }
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 36px;
+      }
+      .skill-group-card {
+        background: var(--box-bg);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 32px 28px 26px 28px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+        transition: box-shadow 0.22s, transform 0.18s, background 0.18s;
+        min-height: 270px;
+        overflow: visible;
+      }
+      .skill-group-card:hover {
+        box-shadow: 0 10px 36px 0 #1e90ff23;
+        transform: translateY(-6px) scale(1.025);
+        background: #202736;
+      }
+      .skill-group-title {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 18px;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-shadow: 0 2px 16px #1e90ff18;
+      }
+      .skills-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .skill-badge {
+        display: inline-block;
+        background: linear-gradient(120deg, #232b36 60%, #202736 100%);
+        color: var(--primary);
+        font-size: 1.06rem;
+        font-weight: 600;
+        padding: 9px 22px;
+        border-radius: var(--skill-radius);
+        box-shadow: 0 1.5px 8px 0 #0077cc29;
+        border: 1.5px solid #25324b;
+        margin: 0;
+        transition: background 0.18s, color 0.18s, box-shadow 0.18s, border 0.18s;
+        cursor: default;
+        user-select: none;
+        position: relative;
+      }
+      .skill-badge:hover {
+        background: linear-gradient(120deg, #1e293b 70%, #1e2537 100%);
+        color: #fff;
+        border: 1.5px solid var(--primary);
+        box-shadow: 0 3px 16px 0 #1e90ff4a;
+      }
+      /* Responsive design */
+      @media (max-width: 800px) {
+        .skills-title {
+          font-size: 2rem;
+        }
+        .skill-group-card {
+          padding: 22px 15px 18px 15px;
+        }
+        .skills-main {
+          padding: 0 7vw 64px 7vw;
+        }
+      }
+      @media (max-width: 480px) {
+        .skills-title {
+          font-size: 1.5rem;
+        }
+        .skills-grid {
+          gap: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // --- HEADER ---
+      const NAV_LINKS = [
+        { label: "Home", href: "home.html", id: "home" },
+        { label: "Skills", href: "skills.html", id: "skills" },
+        { label: "Projects and certification", href: "project_and_certification.html", id: "pc" },
+        { label: "Contact", href: "contact.html", id: "contact" }
+      ];
+      function Header() {
+        return (
+          <header>
+            <div className="logo">
+              <img src="my.png" alt="Youssef BEN LETAIFA" className="logo-img" loading="lazy" />
+              Youssef
+            </div>
+            <nav aria-label="Main navigation">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.id}
+                  href={link.href}
+                  className={link.id === "skills" ? "active" : ""}
+                  tabIndex={0}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+            <a href="https://www.linkedin.com/in/youssefbenletaifa/" className="btn-primary">Get In Touch</a>
+          </header>
+        );
+      }
+
+      // --- SKILLS PAGE ---
+      const SKILLS = [
+        {
+          title: "Software Development",
+          icon: "💻",
+          skills: ["Python", "JavaScript", "Java", "C++", "React", "Node.js"]
+        },
+        {
+          title: "Artificial Intelligence",
+          icon: "🤖",
+          skills: ["Machine Learning", "Deep Learning", "Neural Networks", "Computer Vision", "NLP"]
+        },
+        {
+          title: "Hardware & Embedded",
+          icon: "🛠️",
+          skills: ["Raspberry Pi", "Embedded Systems", "GPIO", "Hardware Integration"]
+        },
+        {
+          title: "CAD & 3D",
+          icon: "🧩",
+          skills: ["AutoCAD", "Fusion 360", "Inventor", "3D Modeling"]
+        },
+        {
+          title: "Data & Analytics",
+          icon: "📊",
+          skills: ["Data Analysis", "Big Data", "Data Visualization", "SQL"]
+        },
+        {
+          title: "Cybersecurity",
+          icon: "🛡️",
+          skills: ["Network Security", "Threat Analysis", "Security Protocols"]
+        },
+        {
+          title: "Web & DevOps",
+          icon: "🌐",
+          skills: ["Frontend", "Backend", "API Design", "Nginx", "Flask"]
+        }
+      ];
+
+      function SkillsPage() {
+        return (
+          <main className="skills-main">
+            <h1 className="skills-title">Skills &amp; Expertise</h1>
+            <div className="skills-subtitle">
+              A comprehensive toolkit spanning multiple domains of technology and innovation
+            </div>
+            <section className="skills-grid">
+              {SKILLS.map((group) => (
+                <div className="skill-group-card" key={group.title}>
+                  <div className="skill-group-title">
+                    <span aria-hidden="true">{group.icon}</span>
+                    {group.title}
+                  </div>
+                  <ul className="skills-list">
+                    {group.skills.map(skill => (
+                      <li className="skill-badge" key={skill}>{skill}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </section>
+          </main>
+        );
+      }
+
+      function App() {
+        return (
+          <>
+            <Header />
+            <SkillsPage />
+          </>
+        );
+      }
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>

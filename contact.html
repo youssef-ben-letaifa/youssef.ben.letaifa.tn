@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Let's Connect - Youssef BEN LETAIFA</title>
+    <meta name="description" content="Contact Youssef BEN LETAIFA - AI, ML, Cybersecurity, Healthcare Tech, and Innovation collaboration" />
+    <link rel="icon" href="my.png" />
+    <!-- React 18 & Babel CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- ICONS: Simple LinkedIn, GitHub SVGs; you may swap with FontAwesome if you want -->
+    <style>
+      :root {
+        --primary: #1e90ff;
+        --primary-dark: #0077cc;
+        --bg: #0d1117;
+        --box-bg: #161b22;
+        --card-bg: #232b36;
+        --text: #f5f5f5;
+        --muted: #8d96a7;
+        --accent: #1e90ff;
+        --shadow: 0 4px 32px 0 rgba(30,144,255,0.10);
+        --radius: 22px;
+        --nav-height: 70px;
+        --connect-gradient: linear-gradient(135deg, #1740a6 15%, #1e90ff 55%, #00ffe1 98%);
+      }
+      html, body {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: system-ui, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+      }
+      *, *:before, *:after {
+        box-sizing: inherit;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+        outline: none;
+      }
+      a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 40px;
+        height: var(--nav-height);
+        background: rgba(13, 17, 23, 0.8);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        backdrop-filter: blur(12px);
+        box-shadow: var(--shadow);
+      }
+      .logo {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--primary);
+        letter-spacing: 1.8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .logo-img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 2px solid var(--primary);
+        object-fit: cover;
+      }
+      nav {
+        display: flex;
+        gap: 18px;
+      }
+      nav a {
+        color: #bbb;
+        font-weight: 500;
+        padding: 6px 10px;
+        border-radius: 5px;
+        transition: background 0.2s, color 0.2s;
+        position: relative;
+      }
+      nav a.active,
+      nav a:hover {
+        color: var(--primary);
+        background: rgba(30,144,255,0.05);
+      }
+      nav a::after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        border-radius: 2px;
+        transition: width .3s;
+        margin-top: 3px;
+      }
+      nav a:hover::after, nav a.active::after {
+        width: 100%;
+      }
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: #fff;
+        padding: 11px 26px;
+        border-radius: var(--radius);
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 2px 8px #1e90ff77;
+        transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+        font-size: 1rem;
+      }
+      .btn-primary:focus-visible {
+        outline: 2px solid #fff;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px) scale(1.04);
+        background: linear-gradient(120deg, #2f9bff, #005fa3);
+        box-shadow: 0 4px 24px #1e90ffaa;
+      }
+      /* --- CONTACT PAGE --- */
+      .connect-section {
+        max-width: 1100px;
+        margin: 64px auto 48px auto;
+        padding: 32px 24px 64px 24px;
+        border-radius: var(--radius);
+        background: var(--box-bg);
+        box-shadow: 0 6px 60px 0 #1e90ff18;
+        position: relative;
+        overflow: hidden;
+      }
+      .connect-section:before {
+        content: '';
+        position: absolute;
+        top: -120px;
+        left: -140px;
+        width: 380px;
+        height: 380px;
+        background: var(--connect-gradient);
+        filter: blur(90px) opacity(.36);
+        border-radius: 50%;
+        z-index: 0;
+        animation: floatPulse 8s ease-in-out infinite alternate;
+      }
+      .connect-glow {
+        position: absolute;
+        bottom: -90px;
+        right: -120px;
+        width: 270px;
+        height: 270px;
+        background: var(--connect-gradient);
+        filter: blur(80px) opacity(.22);
+        border-radius: 50%;
+        z-index: 0;
+        animation: floatPulse2 10s ease-in-out infinite alternate;
+      }
+      @keyframes floatPulse {
+        0% { filter: blur(90px) opacity(.34); }
+        100% { filter: blur(110px) opacity(.44); }
+      }
+      @keyframes floatPulse2 {
+        0% { filter: blur(80px) opacity(.18);}
+        100% { filter: blur(110px) opacity(.30);}
+      }
+      .connect-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+      .connect-left {
+        flex: 1.2 1 320px;
+        min-width: 270px;
+        max-width: 480px;
+      }
+      .connect-title {
+        font-size: 2.6rem;
+        font-weight: 900;
+        color: var(--primary);
+        line-height: 1.13;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+        background: var(--connect-gradient);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+        animation: textGradientMove 8s linear infinite;
+        background-size: 200% 200%;
+      }
+      @keyframes textGradientMove {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 100% 50%; }
+      }
+      .connect-subtitle {
+        color: var(--muted);
+        font-size: 1.19rem;
+        margin-bottom: 25px;
+        font-weight: 400;
+      }
+      .connect-feature {
+        font-size: 1.09rem;
+        margin-bottom: 18px;
+        color: #e6eaf9;
+        font-weight: 500;
+        letter-spacing: 0.1px;
+      }
+      .connect-info-list {
+        margin: 0 0 18px 0;
+        padding: 0;
+        list-style: none;
+      }
+      .connect-info-list li {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 1.1rem;
+        color: #d0e7ff;
+        font-weight: 600;
+      }
+      .connect-info-label {
+        color: var(--muted);
+        min-width: 80px;
+        font-size: 1.03rem;
+        font-weight: 500;
+      }
+      .connect-link-icons {
+        display: flex;
+        gap: 18px;
+        margin: 10px 0 12px 0;
+      }
+      .connect-link-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: #161b22;
+        transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
+        box-shadow: 0 1.5px 8px 0 #0077cc15;
+        border: 2.2px solid #1e90ff28;
+        cursor: pointer;
+        font-size: 1.7rem;
+        position: relative;
+        z-index: 1;
+      }
+      .connect-link-icon:hover {
+        background: var(--primary);
+        box-shadow: 0 10px 36px 0 #1e90ff5a;
+        transform: translateY(-4px) scale(1.07) rotate(-4deg);
+        border: 2.2px solid #fff;
+      }
+      .connect-areas {
+        margin-top: 18px;
+        margin-bottom: 18px;
+      }
+      .areas-title {
+        font-size: 1.22rem;
+        color: var(--primary);
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .areas-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .area-badge {
+        display: inline-block;
+        background: linear-gradient(120deg, #232b36 60%, #202736 100%);
+        color: var(--primary);
+        font-size: 1.01rem;
+        font-weight: 600;
+        padding: 8px 18px;
+        border-radius: 32px;
+        border: 1.5px solid #25324b;
+        letter-spacing: 0.03em;
+        transition: background 0.18s, color 0.18s, box-shadow 0.18s, border 0.18s;
+        user-select: none;
+      }
+      .area-badge:hover {
+        background: linear-gradient(120deg, #1e293b 70%, #1e2537 100%);
+        color: #fff;
+        border: 1.5px solid var(--primary);
+        box-shadow: 0 3px 16px 0 #1e90ff4a;
+      }
+      .connect-quick {
+        margin-top: 12px;
+        font-size: 1.09rem;
+        color: #e2eaf8;
+        font-weight: 500;
+      }
+      .connect-actions {
+        display: flex;
+        gap: 22px;
+        margin-top: 18px;
+        flex-wrap: wrap;
+      }
+      .connect-action-btn {
+        background: var(--connect-gradient);
+        color: #fff;
+        padding: 15px 36px;
+        border-radius: 36px;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        font-size: 1.16rem;
+        box-shadow: 0 6px 30px 0 #1e90ff38;
+        transition: background 0.18s, box-shadow 0.18s, transform 0.16s;
+        animation: pulseBtn 2.8s infinite alternate;
+      }
+      .connect-action-btn:hover, .connect-action-btn:focus-visible {
+        background: linear-gradient(135deg, #1e90ff 30%, #00ffe1 100%);
+        color: #000;
+        transform: scale(1.04) translateY(-2px);
+        box-shadow: 0 12px 44px 0 #1e90ff6a;
+      }
+      @keyframes pulseBtn {
+        0% { box-shadow: 0 6px 30px 0 #1e90ff38;}
+        100% { box-shadow: 0 16px 60px 0 #1e90ff66;}
+      }
+      .connect-right {
+        flex: 1 1 260px;
+        min-width: 220px;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-top: 30px;
+      }
+      .connect-card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        box-shadow: 0 1.5px 8px 0 #0077cc15;
+        padding: 26px 24px;
+        width: 100%;
+        margin-bottom: 0;
+        transition: box-shadow 0.18s, background 0.18s, transform 0.18s;
+        border: 1.7px solid #1e90ff0b;
+        position: relative;
+        z-index: 2;
+        animation: fadeIn 1.1s both;
+      }
+      .connect-card-title {
+        color: var(--primary);
+        font-size: 1.12rem;
+        font-weight: 700;
+        margin-bottom: 7px;
+        letter-spacing: 0.03em;
+      }
+      .connect-card-desc {
+        color: #e2eaf8;
+        font-size: 1.06rem;
+        margin-bottom: 0;
+      }
+      @keyframes fadeIn {
+        0% { opacity: 0; transform: translateY(32px);}
+        100% { opacity: 1; transform: translateY(0);}
+      }
+      @media (max-width: 1100px) {
+        .connect-content {
+          flex-direction: column;
+          gap: 44px;
+        }
+        .connect-right {
+          margin-top: 0;
+        }
+      }
+      @media (max-width: 800px) {
+        .connect-section {
+          padding: 18px 2vw 38px 2vw;
+        }
+        .connect-title {
+          font-size: 2rem;
+        }
+        .connect-card {
+          padding: 17px 12px;
+        }
+      }
+      @media (max-width: 480px) {
+        .connect-section {
+          padding: 7px 1vw 30px 1vw;
+        }
+        .connect-title {
+          font-size: 1.25rem;
+        }
+        .connect-content {
+          gap: 26px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // --- HEADER ---
+      const NAV_LINKS = [
+        { label: "Home", href: "home.html", id: "home" },
+        { label: "Skills", href: "skills.html", id: "skills" },
+        { label: "Projects and certification", href: "project_and_certification.html", id: "pc" },
+        { label: "Contact", href: "contact.html", id: "contact" }
+      ];
+      function Header() {
+        return (
+          <header>
+            <div className="logo">
+              <img src="my.png" alt="Youssef BEN LETAIFA" className="logo-img" loading="lazy" />
+              Youssef
+            </div>
+            <nav aria-label="Main navigation">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.id}
+                  href={link.href}
+                  className={link.id === "contact" ? "active" : ""}
+                  tabIndex={0}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+            <a href="https://www.linkedin.com/in/youssefbenletaifa/" className="btn-primary">Get In Touch</a>
+          </header>
+        );
+      }
+
+      // SVG ICONS
+      function LinkedInIcon({fill="#1e90ff",...props}) {
+        return (
+          <svg width="28" height="28" viewBox="0 0 48 48" fill="none" {...props}>
+            <rect x="4" y="4" width="40" height="40" rx="8" fill="none"/>
+            <path fill={fill} d="M16.5 18.5C17.6046 18.5 18.5 17.6046 18.5 16.5C18.5 15.3954 17.6046 14.5 16.5 14.5C15.3954 14.5 14.5 15.3954 14.5 16.5C14.5 17.6046 15.3954 18.5 16.5 18.5Z"/>
+            <path fill={fill} d="M15 20.5H18V33H15V20.5Z"/>
+            <path fill={fill} d="M23.5 20.5H26.5V22H27C27.6702 21.0334 28.9166 20.5 30.25 20.5C32.7696 20.5 35 22.7304 35 25.25V33H32V25.5C32 24.1193 30.8807 23 29.5 23C28.1193 23 27 24.1193 27 25.5V33H24V20.5H23.5Z"/>
+          </svg>
+        );
+      }
+      function GitHubIcon({fill="#1e90ff",...props}) {
+        return (
+          <svg width="28" height="28" viewBox="0 0 48 48" fill="none" {...props}>
+            <rect x="4" y="4" width="40" height="40" rx="8" fill="none"/>
+            <path fill={fill} fillRule="evenodd" clipRule="evenodd"
+              d="M24 9C16.268 9 10 15.268 10 23c0 6.168 4.008 11.391 9.58 13.24.7.13.955-.304.955-.674 0-.333-.012-1.217-.018-2.391-3.897.847-4.719-1.879-4.719-1.879-.637-1.617-1.555-2.049-1.555-2.049-1.271-.869.096-.852.096-.852 1.406.099 2.147 1.444 2.147 1.444 1.25 2.145 3.281 1.526 4.08 1.169.126-.906.489-1.526.888-1.878-3.111-.354-6.389-1.555-6.389-6.921 0-1.528.546-2.777 1.442-3.757-.145-.355-.625-1.781.135-3.717 0 0 1.175-.377 3.85 1.437A13.382 13.382 0 0124 15.438c1.189.005 2.385.162 3.506.475 2.672-1.814 3.845-1.437 3.845-1.437.762 1.937.282 3.363.139 3.719.9.98 1.441 2.229 1.441 3.757 0 5.377-3.282 6.563-6.406 6.911.5.432.943 1.285.943 2.591 0 1.871-.017 3.379-.017 3.837 0 .372.25.809.962.672C33.997 34.387 38 29.165 38 23c0-7.732-6.268-14-14-14z"
+            />
+          </svg>
+        );
+      }
+      // Replace with your links
+      const PROFESSIONAL_LINKS = [
+        {
+          label: "LinkedIn (Main)",
+          url: "https://www.linkedin.com/in/youssefbenletaifa/",
+          icon: <LinkedInIcon />
+        },
+        {
+          label: "LinkedIn (Secondary)",
+          url: "https://www.linkedin.com/in/youssefbenletaifa-5b6078283/",
+          icon: <LinkedInIcon fill="#0a66c2" />
+        },
+        {
+          label: "GitHub",
+          url: "https://github.com/youssef-ben-letaifa",
+          icon: <GitHubIcon />
+        }
+      ];
+      const AREAS = [
+        "AI & Machine Learning Projects",
+        "Cybersecurity Solutions",
+        "Healthcare Technology",
+        "Software Development",
+        "Innovation & Research"
+      ];
+      function ContactCard({title,desc}) {
+        return (
+          <div className="connect-card">
+            <div className="connect-card-title">{title}</div>
+            <div className="connect-card-desc">{desc}</div>
+          </div>
+        );
+      }
+      function ContactPage() {
+        return (
+          <section className="connect-section">
+            <span className="connect-glow"></span>
+            <div className="connect-content">
+              <div className="connect-left">
+                <div className="connect-title">Let's Connect</div>
+                <div className="connect-subtitle">Ready to collaborate? Reach out — I typically respond within 24 hours.</div>
+                <div className="connect-feature">Get In Touch</div>
+                <ul className="connect-info-list">
+                  <li>
+                    <span className="connect-info-label">Email</span>
+                    <span>
+                      <a href="mailto:youssef.benletaifa@intek.u-jendouba.tn" style={{color: "#39f"}}>
+                        youssef.benletaifa@intek.u-jendouba.tn
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span className="connect-info-label">Phone</span>
+                    <span>+216 92 809 701</span>
+                  </li>
+                  <li>
+                    <span className="connect-info-label">Location</span>
+                    <span>Sousse - Tunisia</span>
+                  </li>
+                </ul>
+                <div className="connect-feature">Professional Links</div>
+                <div className="connect-link-icons">
+                  {PROFESSIONAL_LINKS.map((l, i) => (
+                    <a key={l.label} className="connect-link-icon" href={l.url} target="_blank" rel="noopener noreferrer" aria-label={l.label} title={l.label}>
+                      {l.icon}
+                    </a>
+                  ))}
+                </div>
+                <div className="connect-areas">
+                  <div className="areas-title">Areas of Collaboration</div>
+                  <ul className="areas-list">
+                    {AREAS.map(area => (
+                      <li className="area-badge" key={area}>{area}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="connect-quick">I typically respond within 24 hours</div>
+                <div className="connect-actions">
+                  <a className="connect-action-btn" href="mailto:youssef.benletaifa@intek.u-jendouba.tn?subject=Let's%20Collaborate">Send Message</a>
+                  <a className="connect-action-btn" href="https://calendly.com/" target="_blank" rel="noopener noreferrer">Schedule a Meeting</a>
+                </div>
+              </div>
+              <div className="connect-right">
+                <ContactCard
+                  title="Quick Response"
+                  desc="I typically respond within 24 hours to all collaboration and project inquiries. Let’s start a conversation!"
+                />
+                <ContactCard
+                  title="Schedule a Meeting"
+                  desc="Want to discuss your project in detail? Book a meeting at your convenience—let’s get started together."
+                />
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      function App() {
+        return (
+          <>
+            <Header />
+            <ContactPage />
+          </>
+        );
+      }
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
